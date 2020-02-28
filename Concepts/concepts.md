@@ -9,8 +9,20 @@
   * Greater bit depth => more detailed recording
 * **Quantization**: for a single sample, what value (from bit depth) is it closest to => places sample in that value's place
 
-## Concepts
+## Nyquist & Aliasing
 * **Nyquist Theory**: The maximum representable frequency equals 1/2 of sampling rate
   * For rate of 44.1kHz => 22,050hz
   * Human hearing range: 20hz-20,000hz, thus the standard sampling rate contains our whole range of hearing.
-* Aliasing:
+  * A **Nyquist frequency** is the max frequency that can be recorded by a specific sampling rate
+* **Aliasing**: frequencies above Nyquist frequency are mapped into frequencies less than the Nyquist frequency. Thus, an outlier frequency ends up coded as a frequency within the representable frequency range.
+
+## The Sine Wave
+> y(t) = A * sin(ωt + φ)
+  * A = Amplitude
+  * ω = angular frequency - oscillations / time interval
+    * ω = 2π/T = 2πf
+  * φ = radians per second
+  * t = phase (in radians)
+
+* Any periodic waveform / sound can be broken down into an infinite summation of sine waves - proven by Jean Baptiste Fourier
+  * Ex: there is a mathematical equation to produce a square wave from various sine waves
