@@ -1,5 +1,6 @@
 [Back To Contents](../README.md)
 
+
 # Audio Samples
 
 ## Nyquist & Aliasing
@@ -36,4 +37,34 @@
   * ONLY IF: input signal has been band-limited (low-pass filtered) so that there are no frequencies higher than the Nyquist Frequency
     * Note: frequencies higher than Nyquist Frequency fold back into spectrum (aliasing). An aliased signal will remain as an unfixable error.
 * **Anti-aliasing-filter**: the low pass filter that band-limits filter durring input
-* In obtaining an audio signal, input goes through low pass filter then through ADC (analog to digital converter), then to the encoder where it becomes bitstream output
+* Acquiring signals:
+  * input goes through low pass filter (LPF) then through an analog to digital converter (ADC), then to the encoder where it becomes bitstream output
+* Reconstructing acquired signals:
+  * bitstream gets decoded and taken through DAC then a LPF
+
+## Audio Data
+* The number of quantization levels for coding is q = 2^N, where N = bit depth of the signal
+  * Ex:
+    * 8-bit system: can encode 2^8 (265) quantization levels
+    * 16-bit: 65,536 lvls
+* Audio may use either unsigned or signed data
+  * unsigned (unipolar) ranges zero to MAX, or zero to MIN
+    * 0 to 65,535 (16 bit audio)
+    * no value encodes to 0
+  * signed (bipolar) **(most common)**
+    * ranges MIN to MAX (most common)
+      * Ex: -32,768 to 32,767 (16 bit audio)
+    * always more negative quantization lvls than + (so that zero can be encoded)
+      * Because of how common phase inversion is in our algorithms, some systems limit most negative value to the second most negative value. (we may treat -32,768 as -32,767)
+* Audio algorithms
+  * common audio algorithms
+    * addition
+    * multiplication
+  * issues:
+    * integer numbers can produce errors out of our 16 bit integer bipolar range
+      * fix: we work with numbers in the range of (+/-)1.0
+      | Acquiring Correct Range   |
+      | --- |
+      | Fraction = Integer / 2^N |
+      | Integer = Fraction * 2^N |
+      *
