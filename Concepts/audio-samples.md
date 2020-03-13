@@ -1,7 +1,5 @@
-[Back To Contents](../README.md)
-
-
 # Audio Samples
+[Back To Contents](../README.md)
 
 ## Nyquist & Aliasing
 * **Nyquist Theory**: The maximum representable frequency equals 1/2 of sampling rate
